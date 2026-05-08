@@ -1,0 +1,74 @@
+﻿# Visual Studio временные файлы и результаты сборки
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in[Oo]bj/
+[Bb]uild[Ll]og.*
+
+# Visual Studio файлы кэша и временные файлы
+.[Vv][Ss]/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Файлы индексации контента (ваша проблема!)
+.vs/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Visual Studio 2015/2017/2019/2022
+*.vssscc
+.vspscc
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Dd]efinitions*/
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc

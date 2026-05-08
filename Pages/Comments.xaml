@@ -1,0 +1,44 @@
+﻿<Page x:Class="FTSControl.Pages.Comments"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FTSControl.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Comments">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600*" />
+            <ColumnDefinition Width="200*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="190*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="30*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="110*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="TBHello" Text="" TextAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
+
+        <StackPanel Grid.Column="1" Grid.RowSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Добавить комменарий" Height="50" Width="200" Click="ButtonComments_Click"/>
+            <Button Content="Назад" Height="50" Width="200" Click="ButtonBack_Click"/>
+        </StackPanel>
+
+        <TabControl Grid.RowSpan="5" Grid.Column="0" x:Name="TabMain">
+            <TabItem Header="Комментарии">
+                <DataGrid x:Name="DGridComments" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding CommentID}" Width="60"/>
+                        <DataGridTextColumn Header="Задача" Binding="{Binding TaskID}" Width="80"/>
+                        <DataGridTextColumn Header="Текст комментария" Binding="{Binding CommentText}" Width="*"/>
+                        <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedAt, StringFormat='dd.MM.yy HH:mm'}" Width="130"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

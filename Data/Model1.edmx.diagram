@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec7d1a44f32b4da2a2727347698b429a" Name="Diagram1">
+        <EntityTypeShape EntityType="FTSKanbanModel.Departments" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.Roles" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.TaskComments" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.TaskPriorities" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.Tasks" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.TaskStatuses" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.Users" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTSKanbanModel.UserStatuses" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Users__Departmen__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Users__RoleID__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__TaskComme__TaskI__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__TaskComme__UserI__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Tasks__PriorityI__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Tasks__AssignedT__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Tasks__CreatedBy__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Tasks__CurrentSt__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="FTSKanbanModel.FK__Users__StatusID__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

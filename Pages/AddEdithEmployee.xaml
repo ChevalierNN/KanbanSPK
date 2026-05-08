@@ -1,0 +1,65 @@
+﻿<Page x:Class="FTSControl.Pages.AddEdithEmployee"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FTSControl.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEdithEmployee">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="500*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+            <!-- Добавлена строка для кнопок (была 10 → стала 11, как в оригинале с Grid.Row="10") -->
+        </Grid.RowDefinitions>
+
+        <Label Content="Фамилия" Grid.Column="0" Target="{Binding ElementName=TBLastName}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBLastName" Text="{Binding LastName}" Grid.Row="0" Grid.Column="1"/>
+
+        <Label Content="Имя" Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=TBFirstName}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBFirstName" Text="{Binding FirstName}" Grid.Row="1" Grid.Column="1"/>
+
+        <Label Content="Отчество" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=TBPatronymic}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBPatronymic" Text="{Binding Patronymic}" Grid.Row="2" Grid.Column="1"/>
+
+        <Label Content="Логин" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=TBLoginNew}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBLoginNew" Text="{Binding Login}" Grid.Row="3" Grid.Column="1"/>
+
+        <!-- ❗ Пароль: вводится как текст, но в модель не биндится напрямую — сохраняется как хэш -->
+        <Label Content="Пароль" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=TBPasswordNew}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBPasswordNew" Text="" Grid.Row="4" Grid.Column="1"/>
+        <!-- ❗ Binding убран — обрабатывается в коде -->
+
+        <Label Content="Почта" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=TBEmail}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBEmail" Text="{Binding Email}" Grid.Row="5" Grid.Column="1"/>
+
+        <Label Content="Телефон" Grid.Row="6" Grid.Column="0" Target="{Binding ElementName=TBPhone}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <TextBox x:Name="TBPhone" Text="{Binding Phone}" Grid.Row="6" Grid.Column="1"/>
+
+        <Label Content="Должность" Grid.Row="7" Grid.Column="0" Target="{Binding ElementName=CBRole}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,13,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CBRole" SelectedValue="{Binding RoleID}" DisplayMemberPath="RoleName" 
+              SelectedValuePath="RoleID" Grid.Row="7" Grid.Column="1"/>
+
+        <Label Content="Статус" Grid.Row="8" Grid.Column="0" Target="{Binding ElementName=CBStatus}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <ComboBox x:Name="CBStatus" SelectedValue="{Binding StatusID}" DisplayMemberPath="StatusName" 
+              SelectedValuePath="StatusID" Grid.Row="8" Grid.Column="1"/>
+
+        <Button Content="OK" Grid.Row="10" Grid.Column="1" Click="ButtonOKAddEdit_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="147,0,0,0" Width="58"/>
+        <Button Content="Выйти без изменений" Grid.Row="10" Grid.Column="1" Click="ButtonBack_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="215,0,0,0" Width="132"/>
+    </Grid>
+</Page>
