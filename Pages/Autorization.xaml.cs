@@ -21,111 +21,100 @@ namespace FTSControl.Pages
     /// </summary>
     public partial class Autorization : Page
     {
-        private int _failedAttempts = 0;
-        private const int MaxAttempts = 3;
         public Autorization()
         {
             InitializeComponent();
         }
-        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+
+        private void Enter(object sender, RoutedEventArgs e)
         {
-            TBLogin.BorderBrush = Brushes.Gray;
-            TBPassword.BorderBrush = Brushes.Gray;
-
-            if (string.IsNullOrWhiteSpace(TBLogin.Text))
-            {
-                MessageBox.Show("Введите логин", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                TBLogin.Focus();
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(TBPassword.Password))
-            {
-                MessageBox.Show("Введите пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                TBPassword.Focus();
-                return;
-            }
-
             var context = ConnectObject.GetConnect();
+            Error.Text = string.Empty;
+            if (string.IsNullOrEmpty(Login.Text) && string.IsNullOrEmpty(Password.Password))
+            {
+                Error.Text = "Введите логин и пароль!";
+                return;
+            }
+            if (string.IsNullOrEmpty(Login.Text))
+            {
+                Error.Text = "Введите логин!";
+                Login.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(Password.Password))
+            {
+                Error.Text = "Введите пароль!";
+                Password.Focus();
+                return;
+            }
 
-            var user = context.Users
-                .FirstOrDefault(u => u.Login == TBLogin.Text);
+            var user = ConnectObject.GetConnect().Users.FirstOrDefault(u => u.Login == Login.Text);
 
             if (user == null)
             {
-                _failedAttempts++;
-                if (_failedAttempts >= MaxAttempts)
-                {
-                    MessageBox.Show("Превышено количество попыток.\nОбратитесь к администратору.", "Ошибка",
-                                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                    _failedAttempts = 0; 
-                }
-                else
-                {
-                    MessageBox.Show($"Неверный логин или пароль. Осталось попыток: {MaxAttempts - _failedAttempts}", "Ошибка",MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                Error.Text = "Пользователь не найден!";
                 return;
             }
-
-            if (user.Password != TBPassword.Password)
-            {
-                _failedAttempts++;
-
-                if (_failedAttempts >= MaxAttempts)
-                {
-                    user.StatusID = 2; 
-                    try
-                    {
-                        context.SaveChanges();
-                        MessageBox.Show($"{user.FirstName} {user.LastName}, ваш аккаунт заблокирован!\nОбратитесь к администратору.", "Доступ запрещён",MessageBoxButton.OK, MessageBoxImage.Warning);
-                        _failedAttempts = 0; 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка блокировки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show($"Неверный пароль. Осталось попыток: {MaxAttempts - _failedAttempts}", "Ошибка",MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                return;
-            }
-            _failedAttempts = 0;
             if (user.StatusID == 2)
             {
-                MessageBox.Show($"{user.FirstName} {user.LastName}, ваш аккаунт заблокирован!\nОбратитесь к администратору.", "Доступ запрещён",MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Ваш аккаунт был заблокирован! Обратитесь к администратору.", "Вы заблокированы", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var captcha = new CaptchaWindow();
-            if (captcha.ShowDialog() != true || !captcha.IsCaptchaPassed)
+            if (user.Password == Password.Password)
             {
-                MessageBox.Show("Проверка безопасности не пройдена.", "Ошибка",MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                var captchaWindow = new Captcha();
+                bool? captchaResult = captchaWindow.ShowDialog();
+
+                if (captchaResult == true)
+                {
+                    user.MistakeCount = 0;
+                    context.SaveChanges();
+                    switch (user.RoleID)
+                    {
+                        case 1:
+                            FrameObject.frameMain.Navigate(new Admin());
+                            break;
+                        case 2:
+                            FrameObject.frameMain.Navigate(new Manager());
+                            break;
+                        case 3:
+                            FrameObject.frameMain.Navigate(new Worker());
+                            break;
+                    }
+                }
+                else
+                {
+                    user.MistakeCount++;
+                    if (user.MistakeCount >= 3)
+                    {
+                        user.StatusID = 2;
+                        context.SaveChanges();
+                        MessageBox.Show("Капча решена неверно. Аккаунт заблокирован.", "Блокировка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        context.SaveChanges();
+                        MessageBox.Show($"Капча решена неверно! Осталось {3 - user.MistakeCount} попыток.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
-            User.Id = user.UserID;
-            User.Login = user.Login;
-            User.FirstName = user.FirstName;
-            User.LastName = user.LastName;
-            User.Patronymic = user.Patronymic;
-            User.RoleID = user.RoleID;
-            User.StatusID = user.StatusID;
-
-            MessageBox.Show($"Добро пожаловать, {User.FirstName}!", "Успех",MessageBoxButton.OK, MessageBoxImage.Information);
-
-            switch (user.RoleID)
+            else
             {
-                case 1: FrameObject.frameMain.Navigate(new Admin()); break;
-                case 2: FrameObject.frameMain.Navigate(new Manager()); break;
-                case 3: FrameObject.frameMain.Navigate(new Worker()); break;
-                default: MessageBox.Show("Неизвестная роль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); break;
+                user.MistakeCount++;
+
+                if (user.MistakeCount >= 3)
+                {
+                    user.StatusID = 2;
+                    context.SaveChanges();
+                    MessageBox.Show("Пароль неверный. Аккаунт заблокирован.", "Блокировка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    context.SaveChanges();
+                    MessageBox.Show($"Пароль неверный! Осталось {3 - user.MistakeCount} попыток.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
-        private void TB_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox tb && string.IsNullOrWhiteSpace(tb.Text)) tb.BorderBrush = Brushes.Red;
-            else if (sender is PasswordBox pb && string.IsNullOrWhiteSpace(pb.Password)) pb.BorderBrush = Brushes.Red;
-        }
     }
 }

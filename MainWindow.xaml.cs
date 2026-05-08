@@ -26,7 +26,7 @@ namespace FTSControl
         public MainWindow()
         {
             InitializeComponent();
-            ConnectObject.connect = new FTSKanbanEntities2();
+            ConnectObject.connect = new SPKanbanEntities();
             FrameObject.frameMain = MainFrame;
 
             _timer = new DispatcherTimer();

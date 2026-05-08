@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CaptchaWindow.xaml">
+    <Page Include="Pages\Captcha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,8 +176,8 @@
     <Compile Include="Pages\Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CaptchaWindow.xaml.cs">
-      <DependentUpon>CaptchaWindow.xaml</DependentUpon>
+    <Compile Include="Pages\Captcha.xaml.cs">
+      <DependentUpon>Captcha.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Comments.xaml.cs">
       <DependentUpon>Comments.xaml</DependentUpon>
@@ -237,8 +237,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Logo.jpg" />
-    <Content Include=".gitignore" />
     <Content Include="Data\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -249,6 +247,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Logo.jpg" />
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

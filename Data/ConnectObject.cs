@@ -8,13 +8,13 @@ namespace FTSControl.Data
 {
     class ConnectObject
     {
-        public static FTSKanbanEntities2 connect;
+        public static SPKanbanEntities connect;
 
-        public static FTSKanbanEntities2 GetConnect()
+        public static SPKanbanEntities GetConnect()
         {
             if (connect == null)
             {
-                connect = new FTSKanbanEntities2();
+                connect = new SPKanbanEntities();
             }
             return connect;
         }

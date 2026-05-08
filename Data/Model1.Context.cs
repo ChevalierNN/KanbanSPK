@@ -13,10 +13,10 @@ namespace FTSControl.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FTSKanbanEntities2 : DbContext
+    public partial class SPKanbanEntities : DbContext
     {
-        public FTSKanbanEntities2()
-            : base("name=FTSKanbanEntities2")
+        public SPKanbanEntities()
+            : base("name=SPKanbanEntities")
         {
         }
     

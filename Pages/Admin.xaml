@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="TBHello" Text="" TextAlignment="Center" Grid.Row="0" Grid.Column="1" Width="150"></TextBlock>
-        <Button Grid.Column="1" Grid.Row="1" Content="Добавить сотрудника" Height="50" Width="200" Click="ButtonAddEmployee_Click"/>
+        <Button Grid.Column="1" Content="Добавить сотрудника"  Click="ButtonAddEmployee_Click"  Grid.Row="1"/>
         <Button Grid.Column="1" Content="Выйти из аккаунта" Margin="0,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="38" Width="200" Click="BackAutorization_Click"/>
         <TabControl Grid.RowSpan="5">
 
@@ -44,7 +44,7 @@
                             <DataGridTextColumn Header="ID роли" Binding="{Binding RoleID}"/>
                             <DataGridTextColumn Header="Почта" Binding="{Binding Email}"/>
                             <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
-                            <DataGridTextColumn Header="ID статуса" Binding="{Binding StatusID}"/>
+                            <DataGridTextColumn Header="ID статуса" Binding="{Binding UserStatuses.StatusName}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

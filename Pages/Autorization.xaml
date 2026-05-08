@@ -10,26 +10,31 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
-            <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Авторизация" Width="120" FontSize="18" Height="32" Grid.Row="1" Grid.Column="1"/>
-
-        <TextBox x:Name="TBLogin" Grid.Row="2" Grid.Column="1" Margin="0,0,0,15"/>
-        <PasswordBox x:Name="TBPassword" Grid.Row="3" Grid.Column="1" Margin="0,0,0,15"/>
-
-        <Button x:Name="TBLoginOpen" Content="Войти" Grid.Row="4" Grid.Column="1" Click="ButtonEnter_Click" Height="23" VerticalAlignment="Center"/>
-        <TextBlock x:Name="ErrorMessage" Foreground="Red" Margin="10,5,0,0" />
+        <Label Content="Авторизация" Grid.Column="1" Grid.Row="1" FontSize="24" FontWeight="Bold" />
+        <Label Content="Логин" Grid.Row="3" Grid.Column="1" />
+        <TextBox  x:Name="Login" Grid.Row="4" Grid.Column="1"/>
+        <Label Content="Пароль" Grid.Row="6" Grid.Column="1"/>
+        <PasswordBox x:Name="Password" Grid.Row="7" Grid.Column="1"/>
+        <Button  Click="Enter" Content="Войти" Grid.Column="1" Grid.Row="9"/>
+        <TextBlock x:Name="Error" Foreground="Red" Grid.Column="1" Grid.Row="10" />
 
     </Grid>
 </Page>

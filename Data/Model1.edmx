@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FTSKanbanModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище SPKanbanModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -85,6 +85,7 @@
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime2" Precision="7" />
           <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+          <Property Name="MistakeCount" Type="int" />
         </EntityType>
         <EntityType Name="UserStatuses">
           <Key>
@@ -94,7 +95,7 @@
           <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__TaskComme__TaskI__571DF1D5">
+        <Association Name="FK__TaskComme__TaskI__5812160E">
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -108,7 +109,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskComme__UserI__5812160E">
+        <Association Name="FK__TaskComme__UserI__59063A47">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="TaskComments" Type="Self.TaskComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -120,7 +121,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__AssignedT__4F7CD00D">
+        <Association Name="FK__Tasks__AssignedT__5070F446">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,7 +133,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__CreatedBy__4E88ABD4">
+        <Association Name="FK__Tasks__CreatedBy__4F7CD00D">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,7 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__CurrentSt__5070F446">
+        <Association Name="FK__Tasks__CurrentSt__5165187F">
           <End Role="TaskStatuses" Type="Self.TaskStatuses" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -156,7 +157,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__PriorityI__5165187F">
+        <Association Name="FK__Tasks__PriorityI__52593CB8">
           <End Role="TaskPriorities" Type="Self.TaskPriorities" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище FTSKanbanModelContainer">
+        <EntityContainer Name="Хранилище SPKanbanModelContainer">
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -214,27 +215,27 @@
           <EntitySet Name="TaskStatuses" EntityType="Self.TaskStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserStatuses" EntityType="Self.UserStatuses" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TaskComme__TaskI__571DF1D5" Association="Self.FK__TaskComme__TaskI__571DF1D5">
+          <AssociationSet Name="FK__TaskComme__TaskI__5812160E" Association="Self.FK__TaskComme__TaskI__5812160E">
             <End Role="Tasks" EntitySet="Tasks" />
             <End Role="TaskComments" EntitySet="TaskComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskComme__UserI__5812160E" Association="Self.FK__TaskComme__UserI__5812160E">
+          <AssociationSet Name="FK__TaskComme__UserI__59063A47" Association="Self.FK__TaskComme__UserI__59063A47">
             <End Role="Users" EntitySet="Users" />
             <End Role="TaskComments" EntitySet="TaskComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__AssignedT__4F7CD00D" Association="Self.FK__Tasks__AssignedT__4F7CD00D">
+          <AssociationSet Name="FK__Tasks__AssignedT__5070F446" Association="Self.FK__Tasks__AssignedT__5070F446">
             <End Role="Users" EntitySet="Users" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__CreatedBy__4E88ABD4" Association="Self.FK__Tasks__CreatedBy__4E88ABD4">
+          <AssociationSet Name="FK__Tasks__CreatedBy__4F7CD00D" Association="Self.FK__Tasks__CreatedBy__4F7CD00D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__CurrentSt__5070F446" Association="Self.FK__Tasks__CurrentSt__5070F446">
+          <AssociationSet Name="FK__Tasks__CurrentSt__5165187F" Association="Self.FK__Tasks__CurrentSt__5165187F">
             <End Role="TaskStatuses" EntitySet="TaskStatuses" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__PriorityI__5165187F" Association="Self.FK__Tasks__PriorityI__5165187F">
+          <AssociationSet Name="FK__Tasks__PriorityI__52593CB8" Association="Self.FK__Tasks__PriorityI__52593CB8">
             <End Role="TaskPriorities" EntitySet="TaskPriorities" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
@@ -255,7 +256,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FTSKanbanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SPKanbanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -291,8 +292,8 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK__TaskComme__TaskI__571DF1D5" FromRole="TaskComments" ToRole="Tasks" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__TaskComme__UserI__5812160E" FromRole="TaskComments" ToRole="Users" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__TaskComme__TaskI__5812160E" FromRole="TaskComments" ToRole="Tasks" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__TaskComme__UserI__59063A47" FromRole="TaskComments" ToRole="Users" />
         </EntityType>
         <EntityType Name="TaskPriorities">
           <Key>
@@ -300,7 +301,7 @@
           </Key>
           <Property Name="PriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PriorityName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__PriorityI__5165187F" FromRole="TaskPriorities" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__PriorityI__52593CB8" FromRole="TaskPriorities" ToRole="Tasks" />
         </EntityType>
         <EntityType Name="Tasks">
           <Key>
@@ -316,11 +317,11 @@
           <Property Name="DueDate" Type="DateTime" Precision="7" />
           <Property Name="CreatedAt" Type="DateTime" Precision="7" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TaskComments" Relationship="Self.FK__TaskComme__TaskI__571DF1D5" FromRole="Tasks" ToRole="TaskComments" />
-          <NavigationProperty Name="TaskPriorities" Relationship="Self.FK__Tasks__PriorityI__5165187F" FromRole="Tasks" ToRole="TaskPriorities" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Tasks__AssignedT__4F7CD00D" FromRole="Tasks" ToRole="Users" />
-          <NavigationProperty Name="Users1" Relationship="Self.FK__Tasks__CreatedBy__4E88ABD4" FromRole="Tasks" ToRole="Users" />
-          <NavigationProperty Name="TaskStatuses" Relationship="Self.FK__Tasks__CurrentSt__5070F446" FromRole="Tasks" ToRole="TaskStatuses" />
+          <NavigationProperty Name="TaskComments" Relationship="Self.FK__TaskComme__TaskI__5812160E" FromRole="Tasks" ToRole="TaskComments" />
+          <NavigationProperty Name="TaskPriorities" Relationship="Self.FK__Tasks__PriorityI__52593CB8" FromRole="Tasks" ToRole="TaskPriorities" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Tasks__AssignedT__5070F446" FromRole="Tasks" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK__Tasks__CreatedBy__4F7CD00D" FromRole="Tasks" ToRole="Users" />
+          <NavigationProperty Name="TaskStatuses" Relationship="Self.FK__Tasks__CurrentSt__5165187F" FromRole="Tasks" ToRole="TaskStatuses" />
         </EntityType>
         <EntityType Name="TaskStatuses">
           <Key>
@@ -328,7 +329,7 @@
           </Key>
           <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__CurrentSt__5070F446" FromRole="TaskStatuses" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__CurrentSt__5165187F" FromRole="TaskStatuses" ToRole="Tasks" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -347,11 +348,12 @@
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="7" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <Property Name="MistakeCount" Type="Int32" />
           <NavigationProperty Name="Departments" Relationship="Self.FK__Users__Departmen__4222D4EF" FromRole="Users" ToRole="Departments" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__412EB0B6" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="TaskComments" Relationship="Self.FK__TaskComme__UserI__5812160E" FromRole="Users" ToRole="TaskComments" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__AssignedT__4F7CD00D" FromRole="Users" ToRole="Tasks" />
-          <NavigationProperty Name="Tasks1" Relationship="Self.FK__Tasks__CreatedBy__4E88ABD4" FromRole="Users" ToRole="Tasks" />
+          <NavigationProperty Name="TaskComments" Relationship="Self.FK__TaskComme__UserI__59063A47" FromRole="Users" ToRole="TaskComments" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__AssignedT__5070F446" FromRole="Users" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks1" Relationship="Self.FK__Tasks__CreatedBy__4F7CD00D" FromRole="Users" ToRole="Tasks" />
           <NavigationProperty Name="UserStatuses" Relationship="Self.FK__Users__StatusID__4316F928" FromRole="Users" ToRole="UserStatuses" />
         </EntityType>
         <EntityType Name="UserStatuses">
@@ -387,7 +389,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskComme__TaskI__571DF1D5">
+        <Association Name="FK__TaskComme__TaskI__5812160E">
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -401,7 +403,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskComme__UserI__5812160E">
+        <Association Name="FK__TaskComme__UserI__59063A47">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="TaskComments" Type="Self.TaskComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -413,7 +415,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__PriorityI__5165187F">
+        <Association Name="FK__Tasks__PriorityI__52593CB8">
           <End Role="TaskPriorities" Type="Self.TaskPriorities" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -425,7 +427,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__AssignedT__4F7CD00D">
+        <Association Name="FK__Tasks__AssignedT__5070F446">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -437,7 +439,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__CreatedBy__4E88ABD4">
+        <Association Name="FK__Tasks__CreatedBy__4F7CD00D">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -449,7 +451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tasks__CurrentSt__5070F446">
+        <Association Name="FK__Tasks__CurrentSt__5165187F">
           <End Role="TaskStatuses" Type="Self.TaskStatuses" Multiplicity="1" />
           <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -473,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FTSKanbanEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SPKanbanEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Departments" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -491,27 +493,27 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskComme__TaskI__571DF1D5" Association="Self.FK__TaskComme__TaskI__571DF1D5">
+          <AssociationSet Name="FK__TaskComme__TaskI__5812160E" Association="Self.FK__TaskComme__TaskI__5812160E">
             <End Role="Tasks" EntitySet="Tasks" />
             <End Role="TaskComments" EntitySet="TaskComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskComme__UserI__5812160E" Association="Self.FK__TaskComme__UserI__5812160E">
+          <AssociationSet Name="FK__TaskComme__UserI__59063A47" Association="Self.FK__TaskComme__UserI__59063A47">
             <End Role="Users" EntitySet="Users" />
             <End Role="TaskComments" EntitySet="TaskComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__PriorityI__5165187F" Association="Self.FK__Tasks__PriorityI__5165187F">
+          <AssociationSet Name="FK__Tasks__PriorityI__52593CB8" Association="Self.FK__Tasks__PriorityI__52593CB8">
             <End Role="TaskPriorities" EntitySet="TaskPriorities" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__AssignedT__4F7CD00D" Association="Self.FK__Tasks__AssignedT__4F7CD00D">
+          <AssociationSet Name="FK__Tasks__AssignedT__5070F446" Association="Self.FK__Tasks__AssignedT__5070F446">
             <End Role="Users" EntitySet="Users" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__CreatedBy__4E88ABD4" Association="Self.FK__Tasks__CreatedBy__4E88ABD4">
+          <AssociationSet Name="FK__Tasks__CreatedBy__4F7CD00D" Association="Self.FK__Tasks__CreatedBy__4F7CD00D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tasks__CurrentSt__5070F446" Association="Self.FK__Tasks__CurrentSt__5070F446">
+          <AssociationSet Name="FK__Tasks__CurrentSt__5165187F" Association="Self.FK__Tasks__CurrentSt__5165187F">
             <End Role="TaskStatuses" EntitySet="TaskStatuses" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
@@ -525,9 +527,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище FTSKanbanModelContainer" CdmEntityContainer="FTSKanbanEntities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SPKanbanModelContainer" CdmEntityContainer="SPKanbanEntities">
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="FTSKanbanModel.Departments">
+            <EntityTypeMapping TypeName="SPKanbanModel.Departments">
               <MappingFragment StoreEntitySet="Departments">
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
@@ -535,7 +537,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="FTSKanbanModel.Roles">
+            <EntityTypeMapping TypeName="SPKanbanModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -543,7 +545,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FTSKanbanModel.sysdiagrams">
+            <EntityTypeMapping TypeName="SPKanbanModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -554,7 +556,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskComments">
-            <EntityTypeMapping TypeName="FTSKanbanModel.TaskComments">
+            <EntityTypeMapping TypeName="SPKanbanModel.TaskComments">
               <MappingFragment StoreEntitySet="TaskComments">
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
                 <ScalarProperty Name="TaskID" ColumnName="TaskID" />
@@ -565,7 +567,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskPriorities">
-            <EntityTypeMapping TypeName="FTSKanbanModel.TaskPriorities">
+            <EntityTypeMapping TypeName="SPKanbanModel.TaskPriorities">
               <MappingFragment StoreEntitySet="TaskPriorities">
                 <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
                 <ScalarProperty Name="PriorityName" ColumnName="PriorityName" />
@@ -573,7 +575,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tasks">
-            <EntityTypeMapping TypeName="FTSKanbanModel.Tasks">
+            <EntityTypeMapping TypeName="SPKanbanModel.Tasks">
               <MappingFragment StoreEntitySet="Tasks">
                 <ScalarProperty Name="TaskID" ColumnName="TaskID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -589,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskStatuses">
-            <EntityTypeMapping TypeName="FTSKanbanModel.TaskStatuses">
+            <EntityTypeMapping TypeName="SPKanbanModel.TaskStatuses">
               <MappingFragment StoreEntitySet="TaskStatuses">
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
@@ -597,7 +599,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="FTSKanbanModel.Users">
+            <EntityTypeMapping TypeName="SPKanbanModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -612,11 +614,12 @@
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="MistakeCount" ColumnName="MistakeCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserStatuses">
-            <EntityTypeMapping TypeName="FTSKanbanModel.UserStatuses">
+            <EntityTypeMapping TypeName="SPKanbanModel.UserStatuses">
               <MappingFragment StoreEntitySet="UserStatuses">
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />

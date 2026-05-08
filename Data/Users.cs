@@ -34,6 +34,7 @@ namespace FTSControl.Data
         public int StatusID { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<int> MistakeCount { get; set; }
     
         public virtual Departments Departments { get; set; }
         public virtual Roles Roles { get; set; }
