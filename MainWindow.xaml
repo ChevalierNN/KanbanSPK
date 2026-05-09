@@ -5,57 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FTSControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="800">
+        Title="MainWindow" Height="480" Width="800" ResizeMode="NoResize">
     <Grid>
+        <!--Разметка-->
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="320*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <!--header-->
-        <Rectangle Fill="#003d7c" HorizontalAlignment="Left" Height="100" Width="900" Grid.Row="0"/>
-        <Image Source="Logo.jpg" Width="80" Height="80" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" >
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.081"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Label  Content="ГК САКСЭС" HorizontalContentAlignment="Center"  Width="350" Height="54" FontFamily="Helvetica" FontSize="26" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="213,26,0,0" VerticalAlignment="Top">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-0.367"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-0.16"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-
-        <TextBlock x:Name="DateTimeTextBlock" HorizontalAlignment="Left"  Margin="674,24,0,0" FontSize="16" FontWeight="Bold" Foreground="White"  Width="126" >
-
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
+        <Rectangle Fill="#003d7c" HorizontalAlignment="Left" Height="100" Width="800" Grid.Row="0"/>
+        <Image Source="Logo.jpg" Width="80" Height="80" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5"/>
+        <Label  Content="ГК САКСЭС" HorizontalContentAlignment="Center"  Width="350" Height="54" FontFamily="Helvetica" FontSize="26" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="213,26,0,0" VerticalAlignment="Top"></Label>
+        <TextBlock x:Name="DateTimeTextBlock" HorizontalAlignment="Left"  Margin="674,24,0,0" FontSize="16" FontWeight="Bold" Foreground="White"  Width="126" />
         <!--BODY-->
         <Grid Grid.Row="1">
             <Grid.Background>
                 <ImageBrush ImageSource="baground.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
-            <Frame x:Name="MainFrame" Source="Pages/Autorization.xaml" Margin="0,0,0,0" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" Source="Pages/Autorization.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
         <!--footer-->
-        <Rectangle Fill="#003d7c" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom" Width="900" Grid.Row="2"/>
+        <Rectangle Fill="#003d7c" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom" Width="800" Grid.Row="2"/>
         <TextBlock HorizontalAlignment="Center" Grid.Row="2" Foreground="White" TextWrapping="Wrap" Text="© 2000-2026 Группа компаний САКСЭС" VerticalAlignment="Center"/>
-
     </Grid>
 </Window>

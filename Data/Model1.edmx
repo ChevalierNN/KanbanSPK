@@ -475,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SPKanbanEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SPKanbanEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Departments" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -527,7 +527,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище SPKanbanModelContainer" CdmEntityContainer="SPKanbanEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SPKanbanModelContainer" CdmEntityContainer="SPKanbanEntities1">
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="SPKanbanModel.Departments">
               <MappingFragment StoreEntitySet="Departments">

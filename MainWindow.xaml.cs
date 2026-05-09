@@ -26,7 +26,7 @@ namespace FTSControl
         public MainWindow()
         {
             InitializeComponent();
-            ConnectObject.connect = new SPKanbanEntities();
+            ConnectObject.connect = new SPKanbanEntities1();
             FrameObject.frameMain = MainFrame;
 
             _timer = new DispatcherTimer();
@@ -35,12 +35,13 @@ namespace FTSControl
             _timer.Start();
             UpdateDateTime();
         }
-
+        // Следующие два метода реализуют переодическое обновление
+        // времени и вывод его на UI - интерфейс пользователя
         private void Timer(object sender, EventArgs e)
         {
             UpdateDateTime();
         }
-
+        
         private void UpdateDateTime()
         {
             DateTime now = DateTime.Now;
