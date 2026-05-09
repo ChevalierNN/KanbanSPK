@@ -9,17 +9,20 @@
       Title="AddComments">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*" />
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60*" />
             <RowDefinition Height="40*" />
         </Grid.RowDefinitions>
+        
+        <!--Поле для написания коммеентария-->
         <TextBox x:Name="InputComments" HorizontalAlignment="Center" Margin="0,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="408" Height="97"/>
+        
+        <!--Кнопки Для создания комментария и выхода без изменений-->
         <Button x:Name="Add" Content="Добавить" Click="AddComment_Click" HorizontalAlignment="Center" Margin="0,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="190" Height="30"/>
         <Button Content="Назад" Click="Back_Click" HorizontalAlignment="Center" Margin="0,63,0,0" Grid.Row="1" VerticalAlignment="Top" Width="190" Height="30"/>
-
     </Grid>
 </Page>

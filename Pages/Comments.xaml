@@ -9,6 +9,7 @@
       Title="Comments">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*" />
             <ColumnDefinition Width="200*" />
@@ -22,18 +23,18 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="TBHello" Text="" TextAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
-
+        <!--Кнопки-->
         <StackPanel Grid.Column="1" Grid.RowSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Content="Добавить комменарий" Height="50" Width="200" Click="ButtonComments_Click"/>
             <Button Content="Назад" Height="50" Width="200" Click="ButtonBack_Click"/>
         </StackPanel>
-
+        
+        <!--Таблица вывода комментариев-->
         <TabControl Grid.RowSpan="5" Grid.Column="0" x:Name="TabMain">
             <TabItem Header="Комментарии">
                 <DataGrid x:Name="DGridComments" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding CommentID}" Width="60"/>
-                        <DataGridTextColumn Header="Задача" Binding="{Binding TaskID}" Width="80"/>
+                        <DataGridTextColumn Header="Задача" Binding="{Binding Tasks.Title}" Width="80"/>
                         <DataGridTextColumn Header="Текст комментария" Binding="{Binding CommentText}" Width="*"/>
                         <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedAt, StringFormat='dd.MM.yy HH:mm'}" Width="130"/>
                     </DataGrid.Columns>

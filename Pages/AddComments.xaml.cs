@@ -27,11 +27,9 @@ namespace FTSControl.Pages
             InitializeComponent();
             _taskId = taskId;
         }
-
+        // Метод для добавления комментария 
         private void AddComment_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
                 string text = InputComments.Text?.Trim();
                 if (string.IsNullOrWhiteSpace(text))
                 {
@@ -54,11 +52,6 @@ namespace FTSControl.Pages
 
                 MessageBox.Show("Комментарий добавлен.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 FrameObject.frameMain.GoBack();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

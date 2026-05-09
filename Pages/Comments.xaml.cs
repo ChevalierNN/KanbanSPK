@@ -29,21 +29,12 @@ namespace FTSControl.Pages
             _currentTaskId = taskId;
             LoadComments();
         }
-
+        // Загрузка комментариев 
         private void LoadComments()
         {
-            try
-            {
                 var context = ConnectObject.GetConnect();
-
-                var comments = context.TaskComments.Include(c => c.Users).Where(c => c.TaskID == _currentTaskId) .OrderByDescending(c => c.CreatedAt).ToList();
-
+                var comments = context.TaskComments.Include(c => c.Users).Include(c => c.Tasks).Where(c => c.TaskID == _currentTaskId) .OrderByDescending(c => c.CreatedAt).ToList();
                 DGridComments.ItemsSource = comments;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при загрузке комментариев: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void ButtonComments_Click(object sender, RoutedEventArgs e)
