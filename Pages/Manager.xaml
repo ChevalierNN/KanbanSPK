@@ -9,6 +9,7 @@
       Title="Manager">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*" />
             <ColumnDefinition Width="200*" />
@@ -29,6 +30,7 @@
             <Button Content="Диагармма" Height="50" Width="200" Click="Dia_Click"/>
         </StackPanel>
 
+        <!--Таблицы для отображения задач-->
         <TabControl Grid.RowSpan="5" Grid.Column="0" x:Name="TabMain">
             <TabItem Header="В работе">
                 <DataGrid x:Name="DGridInProcess" AutoGenerateColumns="False" IsReadOnly="True">

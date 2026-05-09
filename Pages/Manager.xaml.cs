@@ -32,7 +32,7 @@ namespace FTSControl.Pages
         {
             FrameObject.frameMain.Navigate(new AddEditTask()); 
         }
-
+        // Изменение задачи
         private void ButtonEditTask_Click(object sender, RoutedEventArgs e)
         {
             var task = (sender as Button)?.DataContext as Tasks;
@@ -41,13 +41,13 @@ namespace FTSControl.Pages
                 FrameObject.frameMain.Navigate(new AddEditTask(task)); 
             }
         }
-
+        
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
             User.Clear(); 
             FrameObject.frameMain.Navigate(new Autorization());
         }
-
+        // Загрузка задач
         private void LoadTasks()
         {
             var context = ConnectObject.GetConnect();
@@ -56,12 +56,12 @@ namespace FTSControl.Pages
             DGridOnReview.ItemsSource = context.Tasks.Where(t => t.CurrentStatusID == 2).ToList();
             DGridDone.ItemsSource = context.Tasks.Where(t => t.CurrentStatusID == 3).ToList();
         }
-
+        // Открытие диаграммы
         private void Dia_Click(object sender, RoutedEventArgs e)
         {
             FrameObject.frameMain.Navigate(new Dia());
         }
-
+        // Комментарии
         private void ButtonComments_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;

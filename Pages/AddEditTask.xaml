@@ -9,6 +9,7 @@
       Title="AddEditTask">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
@@ -23,6 +24,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!--Поля для заполнения-->
         <Label Content="Дата создания" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" Grid.ColumnSpan="2" Margin="105,5,495,40" Grid.RowSpan="2"/>
         <Label Content="дедлайн" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" Margin="119,29,0,0"/>
         <DatePicker x:Name="DPDate" Grid.Row="0" Grid.Column="1" DisplayDateStart="2024-01-01" SelectedDate="{Binding CreatedAt}" Margin="0,5,0,29"/>
@@ -47,6 +49,8 @@
         <DatePicker SelectedDate="{Binding DueDate}" Grid.Column="1" Margin="0,35,0,40" Grid.RowSpan="2" />
         <Label Content="Приоритет" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=CBTaskStatus}" Grid.ColumnSpan="2" Margin="127,18,587,14" Grid.RowSpan="2"/>
         <ComboBox x:Name="CBPriority" DisplayMemberPath="PriorityName" SelectedValuePath="PriorityID" SelectedValue="{Binding PriorityID}" Margin="0,22,0,1" Grid.Row="5" Grid.Column="1" />
+        
+        <!--Кнопки-->
         <Button Content="OK" Grid.Row="6" Grid.Column="1" Click="ButtonOKAddEdit_Click" Margin="146,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60"/>
         <Button Grid.Column="1" Content="Выйти без изменений" Margin="217,1,0,0" Grid.Row="6" Click="ButtonBack_Click" Width="132" VerticalAlignment="Top" HorizontalAlignment="Left"/>
     </Grid>

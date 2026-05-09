@@ -46,7 +46,7 @@ namespace FTSControl.Pages
                 CBTaskStatus.ItemsSource = ((IEnumerable<TaskStatuses>)CBTaskStatus.ItemsSource).Where(s => s.StatusID == 1 || s.StatusID == 2).ToList();
             }
         }
-
+        // Метод редактирования и добавления задачи
         private void ButtonOKAddEdit_Click(object sender, RoutedEventArgs e) 
         {
             if (string.IsNullOrWhiteSpace(tempTask.Title) ||
