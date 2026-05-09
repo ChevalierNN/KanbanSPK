@@ -31,100 +31,47 @@ namespace FTSControl.Pages
         {
             FrameObject.frameMain.GoBack();
         }
-
+        // Метод для отрисовки диаграммы
         private void DrawPieChart()
         {
             PieChartCanvas.Children.Clear();
-
             var context = ConnectObject.GetConnect();
+            var tasks = context.Tasks.ToList();
+            var counts = new[] { 1, 2, 3 }.Select(s => tasks.Count(t => t.CurrentStatusID == s)).ToArray();
+            int total = counts.Sum();
 
-            AllQuests.Text = $"Всего задач: {context.Tasks.Count()}";
-
-            int inProcess = context.Tasks.Count(t => t.CurrentStatusID == 1);
-            int onReview = context.Tasks.Count(t => t.CurrentStatusID == 2);
-            int done = context.Tasks.Count(t => t.CurrentStatusID == 3);
-            if (inProcess == 0 && onReview == 0 && done == 0)
+            AllQuests.Text = $"Всего задач: {tasks.Count}";
+            if (total == 0)
             {
-                var text = new TextBlock
-                {
-                    Text = "Нет задач",
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    FontSize = 16
-                };
-                PieChartCanvas.Children.Add(text);
+                PieChartCanvas.Children.Add(new TextBlock { Text = "Нет задач", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 16 });
                 return;
             }
 
-            double centerX = PieChartCanvas.Width / 2;
-            double centerY = PieChartCanvas.Height / 2;
-            double radius = Math.Min(centerX, centerY) - 10;
-
+            double cx = PieChartCanvas.Width / 2, cy = PieChartCanvas.Height / 2, r = Math.Min(cx, cy) - 10;
             var colors = new[] { Brushes.LightBlue, Brushes.LightGoldenrodYellow, Brushes.LightGreen };
-            var values = new[] { inProcess, onReview, done };
-            var labels = new[] { $"В работе ({inProcess})", $"На проверке ({onReview})", $"Готово ({done})" };
-
-            double startAngle = -90; 
+            var labels = new[] { $"В работе ({counts[0]})", $"На проверке ({counts[1]})", $"Готово ({counts[2]})" };
+            double startAngle = -90;
 
             for (int i = 0; i < 3; i++)
             {
-                if (values[i] == 0) continue; 
+                if (counts[i] == 0) continue;
+                double sweep = 360.0 * counts[i] / total;
+                double rad = Math.PI / 180;
 
-                double sweepAngle = 360.0 * values[i] / (inProcess + onReview + done); 
+                var fig = new PathFigure { StartPoint = new Point(cx, cy), IsClosed = true };
+                fig.Segments.Add(new LineSegment(new Point(cx + r * Math.Cos(startAngle * rad), cy + r * Math.Sin(startAngle * rad)), true));
+                fig.Segments.Add(new ArcSegment(new Point(cx + r * Math.Cos((startAngle + sweep) * rad), cy + r * Math.Sin((startAngle + sweep) * rad)), new Size(r, r), 0, sweep > 180, SweepDirection.Clockwise, true));
+                fig.Segments.Add(new LineSegment(new Point(cx, cy), true));
 
-                var geometry = new PathGeometry();
-                var figure = new PathFigure();
-                figure.StartPoint = new Point(centerX, centerY);
+                PieChartCanvas.Children.Add(new Path { Data = new PathGeometry { Figures = { fig } }, Fill = colors[i], Stroke = Brushes.White, StrokeThickness = 1 });
 
-                double startX = centerX + radius * Math.Cos(startAngle * Math.PI / 180);
-                double startY = centerY + radius * Math.Sin(startAngle * Math.PI / 180);
-                figure.Segments.Add(new LineSegment(new Point(startX, startY), true));
+                double mid = startAngle + sweep / 2, tr = r * 0.6;
+                var tb = new TextBlock { Text = labels[i], FontSize = 10, Foreground = Brushes.Black };
+                Canvas.SetLeft(tb, cx + tr * Math.Cos(mid * rad) - 30);
+                Canvas.SetTop(tb, cy + tr * Math.Sin(mid * rad) - 10);
+                PieChartCanvas.Children.Add(tb);
 
-                double endX = centerX + radius * Math.Cos((startAngle + sweepAngle) * Math.PI / 180);
-                double endY = centerY + radius * Math.Sin((startAngle + sweepAngle) * Math.PI / 180);
-                figure.Segments.Add(new ArcSegment(
-                    new Point(endX, endY),
-                    new Size(radius, radius),
-                    0,
-                    sweepAngle > 180,
-                    SweepDirection.Clockwise,
-                    true
-                ));
-
-                figure.Segments.Add(new LineSegment(new Point(centerX, centerY), true));
-                figure.IsClosed = true;
-
-                geometry.Figures.Add(figure);
-
-                var path = new Path
-                {
-                    Data = geometry,
-                    Fill = colors[i],
-                    Stroke = Brushes.White,
-                    StrokeThickness = 1
-                };
-
-                PieChartCanvas.Children.Add(path);
-
-                double midAngle = startAngle + sweepAngle / 2;
-                double textRadius = radius * 0.6;
-                double textX = centerX + textRadius * Math.Cos(midAngle * Math.PI / 180);
-                double textY = centerY + textRadius * Math.Sin(midAngle * Math.PI / 180);
-
-                var textBlock = new TextBlock
-                {
-                    Text = labels[i],
-                    FontSize = 10,
-                    Foreground = Brushes.Black,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-
-                Canvas.SetLeft(textBlock, textX - 30);
-                Canvas.SetTop(textBlock, textY - 10);
-                PieChartCanvas.Children.Add(textBlock);
-
-                startAngle += sweepAngle;
+                startAngle += sweep;
             }
         }
 
@@ -132,7 +79,6 @@ namespace FTSControl.Pages
         {
            var context = ConnectObject.GetConnect();
            DrawPieChart(); 
-
         }
     }
 }

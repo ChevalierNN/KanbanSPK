@@ -9,6 +9,7 @@
       Title="Dia">
 
     <Grid Grid.Column="1" Grid.Row="2" Margin="10">
+        <!--Разметка-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="200*"/>
@@ -16,7 +17,6 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Статусы задач" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="0,5"/>
-
         <Canvas x:Name="PieChartCanvas" Width="200" Height="200" HorizontalAlignment="Center" Margin="0,10,0,163" Grid.Row="1"/>
 
         <Button Content="Назад" Margin="542,0,51,0" Grid.Row="2" VerticalAlignment="Center" Height="28" Click="Back_Click"/>
