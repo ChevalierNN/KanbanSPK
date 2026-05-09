@@ -34,11 +34,6 @@ namespace FTSControl.Pages
             var task = (sender as Button)?.DataContext as Tasks;
             if (task != null)
             {
-                if (task.AssignedToUserID != User.Id)
-                {
-                    MessageBox.Show("Вы не можете редактировать чужую задачу!", "Доступ запрещён", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
                 if (task.CurrentStatusID != 1)
                 {
                     MessageBox.Show("Вы можете редактировать только задачи со статусом «В работе».", "Доступ запрещён", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -54,11 +49,12 @@ namespace FTSControl.Pages
             User.Clear(); 
             FrameObject.frameMain.Navigate(new Autorization());
         }
-
+        // Загрузка задач
         private void LoadTasks()
         {
             var context = ConnectObject.GetConnect();
             var userId = User.Id;
+            var tasks = context.Tasks.Include(t => t.TaskPriorities).Include(t => t.Users).Where(t => t.AssignedToUserID == userId).ToList();
 
             DGridInProcess.ItemsSource = context.Tasks.Where(t => t.AssignedToUserID == userId && t.CurrentStatusID == 1).ToList();
             DGridOnReview.ItemsSource = context.Tasks.Where(t => t.AssignedToUserID == userId && t.CurrentStatusID == 2).ToList();

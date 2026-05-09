@@ -9,6 +9,7 @@
       Title="Worker">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*" />
             <ColumnDefinition Width="200*" />
@@ -27,6 +28,7 @@
             <Button Content="Выйти из аккаунта" Height="50" Width="200" Click="ButtonBack_Click"/>
         </StackPanel>
 
+        <!--Таблица для отображения задач-->
         <TabControl Grid.RowSpan="5" Grid.Column="0" x:Name="TabMain">
             <TabItem Header="В работе">
                 <DataGrid x:Name="DGridInProcess" AutoGenerateColumns="False" IsReadOnly="True">
@@ -37,7 +39,7 @@
                         <DataGridTextColumn Header="Срочность"  Binding="{Binding TaskPriorities.PriorityName}" Width="90"/>
                         <DataGridTextColumn Header="Дедлайн"  Binding="{Binding DueDate, StringFormat='dd.MM.yy HH:mm'}"  Width="120"/>
                         <DataGridTextColumn Header="Создана" Binding="{Binding CreatedAt, StringFormat='dd.MM.yy HH:mm'}" Width="120"/>
-                        <DataGridTextColumn Header="Исполнитель"  Binding="{Binding AssignedToUserID}" Width="100"/>
+                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding Users.LastName}" Width="100"/>
                         <DataGridTemplateColumn Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -63,7 +65,7 @@
                         <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
                         <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="*"/>
                         <DataGridTextColumn Header="Назначена" Binding="{Binding UpdatedAt, StringFormat='dd.MM.yy HH:mm'}" Width="120"/>
-                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding AssignedToUserID}" Width="120"/>
+                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding Users.LastName}" Width="100"/>
                         <DataGridTextColumn Header="Срочность" Binding="{Binding TaskPriorities.PriorityName}" Width="90"/>
                         <DataGridTemplateColumn Width="100">
                             <DataGridTemplateColumn.CellTemplate>
@@ -89,7 +91,7 @@
                         <DataGridTextColumn Header="№" Binding="{Binding TaskID}" Width="60"/>
                         <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
                         <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="*"/>
-                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding AssignedToUserID}" Width="120"/>
+                        <DataGridTextColumn Header="Исполнитель" Binding="{Binding Users.LastName}" Width="100"/>
                         <DataGridTextColumn Header="Срочность" Binding="{Binding TaskPriorities.PriorityName}" Width="90"/>
                         <DataGridTemplateColumn Width="100">
                             <DataGridTemplateColumn.CellTemplate>

@@ -69,6 +69,16 @@ namespace FTSControl.Pages
                 {
                     user.MistakeCount = 0;
                     context.SaveChanges();
+
+                    // Запись данных в класс
+                    User.Id = user.UserID;
+                    User.Login = user.Login;
+                    User.FirstName = user.FirstName;
+                    User.LastName = user.LastName;
+                    User.Patronymic = user.Patronymic;
+                    User.RoleID = user.RoleID;
+                    User.StatusID = user.StatusID;
+
                     switch (user.RoleID)
                     {
                         case 1:
