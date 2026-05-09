@@ -9,6 +9,7 @@
       Title="AddEdithEmployee">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300*" />
             <ColumnDefinition Width="500*" />
@@ -25,9 +26,9 @@
             <RowDefinition Height="50*" />
             <RowDefinition Height="50*" />
             <RowDefinition Height="50*" />
-            <!-- Добавлена строка для кнопок (была 10 → стала 11, как в оригинале с Grid.Row="10") -->
         </Grid.RowDefinitions>
 
+        <!--Поля-->
         <Label Content="Фамилия" Grid.Column="0" Target="{Binding ElementName=TBLastName}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
         <TextBox x:Name="TBLastName" Text="{Binding LastName}" Grid.Row="0" Grid.Column="1"/>
 
@@ -40,10 +41,8 @@
         <Label Content="Логин" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=TBLoginNew}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
         <TextBox x:Name="TBLoginNew" Text="{Binding Login}" Grid.Row="3" Grid.Column="1"/>
 
-        <!-- ❗ Пароль: вводится как текст, но в модель не биндится напрямую — сохраняется как хэш -->
         <Label Content="Пароль" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=TBPasswordNew}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
-        <TextBox x:Name="TBPasswordNew" Text="" Grid.Row="4" Grid.Column="1"/>
-        <!-- ❗ Binding убран — обрабатывается в коде -->
+        <TextBox x:Name="TBPasswordNew"  Text="{Binding Password}" Grid.Row="4" Grid.Column="1"/>
 
         <Label Content="Почта" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=TBEmail}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
         <TextBox x:Name="TBEmail" Text="{Binding Email}" Grid.Row="5" Grid.Column="1"/>
@@ -51,15 +50,17 @@
         <Label Content="Телефон" Grid.Row="6" Grid.Column="0" Target="{Binding ElementName=TBPhone}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
         <TextBox x:Name="TBPhone" Text="{Binding Phone}" Grid.Row="6" Grid.Column="1"/>
 
-        <Label Content="Должность" Grid.Row="7" Grid.Column="0" Target="{Binding ElementName=CBRole}" HorizontalAlignment="Left" Margin="221,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox x:Name="CBRole" SelectedValue="{Binding RoleID}" DisplayMemberPath="RoleName" 
-              SelectedValuePath="RoleID" Grid.Row="7" Grid.Column="1"/>
+        <Label Content="Должность" Grid.Row="8" Grid.Column="0" Target="{Binding ElementName=CBRole}" HorizontalAlignment="Left" Margin="221,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="CBRole" SelectedValue="{Binding RoleID}" DisplayMemberPath="RoleName" SelectedValuePath="RoleID" Grid.Row="8" Grid.Column="1"/>
 
-        <Label Content="Статус" Grid.Row="8" Grid.Column="0" Target="{Binding ElementName=CBStatus}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
-        <ComboBox x:Name="CBStatus" SelectedValue="{Binding StatusID}" DisplayMemberPath="StatusName" 
-              SelectedValuePath="StatusID" Grid.Row="8" Grid.Column="1"/>
+        <Label Content="Департамент" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="214,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="CBDepartments" SelectedValue="{Binding DepartmentID}" DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentID" Grid.Row="7" Grid.Column="1"/>
 
-        <Button Content="OK" Grid.Row="10" Grid.Column="1" Click="ButtonOKAddEdit_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="147,0,0,0" Width="58"/>
-        <Button Content="Выйти без изменений" Grid.Row="10" Grid.Column="1" Click="ButtonBack_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="215,0,0,0" Width="132"/>
+        <Label Content="Статус" Grid.Row="9" Grid.Column="0" Target="{Binding ElementName=CBStatus}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="229,0,0,0"/>
+        <ComboBox x:Name="CBStatus" SelectedValue="{Binding StatusID}" DisplayMemberPath="StatusName" SelectedValuePath="StatusID" Grid.Row="9" Grid.Column="1"/>
+
+        <!--Кнопки-->
+        <Button Content="OK" Grid.Row="10" Grid.Column="1" Click="ButtonOKAddEdit_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="147,0,0,0" Width="58"/>
+        <Button Content="Выйти без изменений" Grid.Row="10" Grid.Column="1" Click="ButtonBack_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="215,0,0,0" Width="132"/>
     </Grid>
 </Page>

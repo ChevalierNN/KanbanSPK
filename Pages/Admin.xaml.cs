@@ -36,7 +36,7 @@ namespace FTSControl.Pages
         {
             FrameObject.frameMain.GoBack();
         }
-
+        // Переход на страницу AddEdithUser с заполненными полями для удобного изменения
         private void ButtonEditEmployee_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;

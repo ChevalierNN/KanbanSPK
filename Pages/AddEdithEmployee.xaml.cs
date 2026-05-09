@@ -35,7 +35,9 @@ namespace FTSControl.Pages
 
             CBRole.ItemsSource = ConnectObject.GetConnect().Roles.ToList();
             CBStatus.ItemsSource = ConnectObject.GetConnect().UserStatuses.ToList();
+            CBDepartments.ItemsSource = ConnectObject.GetConnect().Departments.ToList();
         }
+        // Метод для добавления и редактирования учётной записи пользвоателя
         private void ButtonOKAddEdit_Click(object sender, RoutedEventArgs e)
         {
             bool isNew = tempEmployee.UserID == 0;
@@ -46,7 +48,7 @@ namespace FTSControl.Pages
                 string.IsNullOrWhiteSpace(TBLoginNew.Text) ||
                 (isNew && string.IsNullOrWhiteSpace(TBPasswordNew.Text)) ||
                 CBRole.SelectedItem == null ||
-                CBStatus.SelectedItem == null)
+                CBStatus.SelectedItem == null || CBDepartments.SelectedItem == null)
             {
                 MessageBox.Show("Заполните все обязательные поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -58,6 +60,13 @@ namespace FTSControl.Pages
             {
                 tempEmployee.Password = TBPasswordNew.Text; 
             }
+            
+            if (isNew)
+            {
+                tempEmployee.MistakeCount = 0;
+                tempEmployee.CreatedAt = DateTime.Now;
+            }
+            tempEmployee.UpdatedAt = DateTime.Now;
 
             var context = ConnectObject.GetConnect();
 
