@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Captcha" Height="400" Width="350" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid>
+        <!--Разметка-->
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="75"/>
@@ -21,10 +22,13 @@
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
+        
+        <!--Изображения-->
         <Image Source="/CaptchaResource/1.png" x:Name="ARB" Width="100" Height="100" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" MouseLeftButtonDown="Selected_MouseLeftButtonDown" Margin="50,25,0,0"/>
         <Image Source="/CaptchaResource/2.png" x:Name="ARC" Width="100" Height="100"  Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" MouseLeftButtonDown="Selected_MouseLeftButtonDown" Margin="0,25,50,0"/>
         <Image Source="/CaptchaResource/3.png" x:Name="ARD" Width="100" Height="100" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" MouseLeftButtonDown="Selected_MouseLeftButtonDown" Margin="50,0,0,25"/>
         <Image Source="/CaptchaResource/4.png" x:Name="ARF" Width="100" Height="100" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" MouseLeftButtonDown="Selected_MouseLeftButtonDown" Margin="0,0,50,25"/>
+        
         <TextBlock Text="Поверните в вернео положение:" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="TBQuestion" MouseLeftButtonDown="Selected_MouseLeftButtonDown" FontSize="14"/>
         <Button Click="CheckBTN" Content="Проверить" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"/>
     </Grid>

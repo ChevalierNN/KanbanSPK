@@ -32,7 +32,7 @@ namespace FTSControl.Pages
                 ApplyRotat(images[i], rotat[i]);
             }
         }
-
+        // Поворачивает изображение на 90 градусов
         private void Selected_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var img = (Image)sender;
@@ -42,7 +42,7 @@ namespace FTSControl.Pages
             ApplyRotat(img, rotat[index]);
 
         }
-
+        // Проверка все ли изображения повёрнуты верно
         private void CheckBTN(object sender, RoutedEventArgs e)
         {
             bool isCorrect = Array.TrueForAll(rotat, a => a == 0);

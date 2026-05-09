@@ -9,6 +9,7 @@
       Title="Autorization">
 
     <Grid>
+        <!--Разметка-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -27,7 +28,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
-
+        
+        <!--Поля-->
         <Label Content="Авторизация" Grid.Column="1" Grid.Row="1" FontSize="24" FontWeight="Bold" />
         <Label Content="Логин" Grid.Row="3" Grid.Column="1" />
         <TextBox  x:Name="Login" Grid.Row="4" Grid.Column="1"/>
@@ -35,6 +37,5 @@
         <PasswordBox x:Name="Password" Grid.Row="7" Grid.Column="1"/>
         <Button  Click="Enter" Content="Войти" Grid.Column="1" Grid.Row="9"/>
         <TextBlock x:Name="Error" Foreground="Red" Grid.Column="1" Grid.Row="10" />
-
     </Grid>
 </Page>

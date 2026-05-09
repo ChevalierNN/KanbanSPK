@@ -25,7 +25,7 @@ namespace FTSControl.Pages
         {
             InitializeComponent();
         }
-
+        // Метод для аунтификации пользователя
         private void Enter(object sender, RoutedEventArgs e)
         {
             var context = ConnectObject.GetConnect();
@@ -48,7 +48,7 @@ namespace FTSControl.Pages
                 return;
             }
 
-            var user = ConnectObject.GetConnect().Users.FirstOrDefault(u => u.Login == Login.Text);
+            var user = ConnectObject.GetConnect().Users.FirstOrDefault(u => u.Login == Login.Text); // подключение базы данных
 
             if (user == null)
             {
