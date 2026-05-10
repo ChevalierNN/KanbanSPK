@@ -25,7 +25,8 @@
         <TextBlock x:Name="TBHello" Text="" TextAlignment="Center" Grid.Row="0" Grid.Column="1" Width="150"></TextBlock>
         <Button Grid.Column="1" Content="Добавить сотрудника"  Click="ButtonAddEmployee_Click"  Grid.Row="1"/>
         <Button Grid.Column="1" Content="Выйти из аккаунта" Margin="0,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="38" Width="200" Click="BackAutorization_Click"/>
-        
+        <Button Click="Export" Content="Экспортировать" Grid.Column="1" Grid.Row="3"/>
+
         <!--Таблица пользователей-->
         <TabControl Grid.RowSpan="5">
             <TabItem>
