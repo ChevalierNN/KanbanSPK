@@ -43,12 +43,19 @@ namespace FTSControl.Pages
             AllQuests.Text = $"Всего задач: {tasks.Count}";
             if (total == 0)
             {
-                PieChartCanvas.Children.Add(new TextBlock { Text = "Нет задач", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 16 });
+                PieChartCanvas.Children.Add(new TextBlock
+                {
+                    Text = "Нет задач",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontSize = 15,
+                    FontWeight = FontWeights.Bold
+                });
                 return;
             }
 
             double cx = PieChartCanvas.Width / 2, cy = PieChartCanvas.Height / 2, r = Math.Min(cx, cy) - 10;
-            var colors = new[] { Brushes.LightBlue, Brushes.LightGoldenrodYellow, Brushes.LightGreen };
+            var colors = new[] { Brushes.Blue, Brushes.Yellow, Brushes.Green };
             var labels = new[] { $"В работе ({counts[0]})", $"На проверке ({counts[1]})", $"Готово ({counts[2]})" };
             double startAngle = -90;
 
@@ -66,9 +73,15 @@ namespace FTSControl.Pages
                 PieChartCanvas.Children.Add(new Path { Data = new PathGeometry { Figures = { fig } }, Fill = colors[i], Stroke = Brushes.White, StrokeThickness = 1 });
 
                 double mid = startAngle + sweep / 2, tr = r * 0.6;
-                var tb = new TextBlock { Text = labels[i], FontSize = 10, Foreground = Brushes.Black };
-                Canvas.SetLeft(tb, cx + tr * Math.Cos(mid * rad) - 30);
-                Canvas.SetTop(tb, cy + tr * Math.Sin(mid * rad) - 10);
+                var tb = new TextBlock
+                {
+                    Text = labels[i],
+                    FontSize = 12, 
+                    FontWeight = FontWeights.Bold, 
+                    Foreground = Brushes.Black
+                };
+                Canvas.SetLeft(tb, cx + tr * Math.Cos(mid * rad) - 40);  
+                Canvas.SetTop(tb, cy + tr * Math.Sin(mid * rad) - 12);  
                 PieChartCanvas.Children.Add(tb);
 
                 startAngle += sweep;
