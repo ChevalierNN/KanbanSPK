@@ -25,7 +25,8 @@
         <TextBlock x:Name="TBHello" Text="" TextAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
 
         <StackPanel Grid.Column="1" Grid.RowSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="Выгрузить данных" Click="Export"/>
+            <Button Content="Выгрузить данные json " Click="Export"/>
+            <Button Content="Выгрузить данных Excel" Click="ExportExcel"/>
             <Button Content="Создать задачу" Height="50" Width="200" Click="ButtonAdd_Click"/>
             <Button Content="Диагармма" Height="50" Width="200" Click="Dia_Click"/>
             <Button Content="Выйти из аккаунта" Height="50" Width="200" Click="ButtonBack_Click"/>
