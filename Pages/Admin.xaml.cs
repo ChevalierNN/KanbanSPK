@@ -1,13 +1,13 @@
 ﻿using FTSControl.Data;
 using Microsoft.Win32;
-using Newtonsoft.Json;        
-using Newtonsoft.Json.Linq;   
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using OfficeOpenXml;           
-using OfficeOpenXml.Style;     
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,41 +21,79 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace FTSControl.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Admin.xaml
-    /// </summary>
     public partial class Admin : Page
     {
+        private List<Users> _originalUsersList;
+
         public Admin()
         {
             InitializeComponent();
 
-            DGridEmployees.ItemsSource = ConnectObject.GetConnect().Users.ToList();
+            _originalUsersList = ConnectObject.GetConnect().Users.ToList();
+
+            var displayList = _originalUsersList.Select(u => new
+            {
+                u.UserID,
+                u.LastName,
+                u.FirstName,
+                u.Patronymic,
+                u.Login,
+                Password = HashPassword(u.Password),
+                Roles = u.Roles,
+                Departments = u.Departments,
+                UserStatuses = u.UserStatuses,
+                u.Email,
+                u.Phone,
+                u.CreatedAt,
+                u.UpdatedAt
+            }).ToList();
+
+            DGridEmployees.ItemsSource = displayList;
+        }
+        // Шифрование пароля
+        private string HashPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                return string.Empty;
+
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            }
         }
 
         private void ButtonAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             FrameObject.frameMain.Navigate(new AddEdithEmployee());
         }
+
         private void BackAutorization_Click(object sender, RoutedEventArgs e)
         {
             FrameObject.frameMain.GoBack();
         }
-        // Переход на страницу AddEdithUser с заполненными полями для удобного изменения
+
         private void ButtonEditEmployee_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var selectedUser = button?.DataContext as Users;
+            dynamic item = button?.DataContext;
 
-            if (selectedUser != null)
+            if (item != null)
             {
-                FrameObject.frameMain.Navigate(new AddEdithEmployee(selectedUser));
+                int userId = item.UserID;
+                var userToEdit = _originalUsersList.FirstOrDefault(u => u.UserID == userId);
+
+                if (userToEdit != null)
+                {
+                    FrameObject.frameMain.Navigate(new AddEdithEmployee(userToEdit));
+                }
             }
         }
-        // Метод для экспорта таблицы пользователей в Json
+        // Экспорт в виде json
         private void Export(object sender, RoutedEventArgs e)
         {
             try
@@ -67,33 +105,43 @@ namespace FTSControl.Pages
                     Title = "Экспорт списка сотрудников"
                 };
 
-                if (saveFileDialog.ShowDialog() != true) return; 
+                if (saveFileDialog.ShowDialog() != true) return;
 
-                var context = ConnectObject.GetConnect();
-                var employees = context.Users.Select(u => new
-                    {u.UserID,u.LastName,u.FirstName,u.Patronymic,u.Login,Role = u.Roles != null ? u.Roles.RoleName : "Не указана",
-                     Department = u.Departments != null ? u.Departments.DepartmentName : "Не указан",Email = u.Email,
-                     Phone = u.Phone,Status = u.UserStatuses != null ? u.UserStatuses.StatusName : "Неизвестен",
-                     u.CreatedAt,u.UpdatedAt}).ToList();
+                var employees = _originalUsersList.Select(u => new
+                {
+                    u.UserID,
+                    u.LastName,
+                    u.FirstName,
+                    u.Patronymic,
+                    u.Login,
+                    u.Password,
+                    Role = u.Roles != null ? u.Roles.RoleName : "Не указана",
+                    Department = u.Departments != null ? u.Departments.DepartmentName : "Не указан",
+                    Email = u.Email,
+                    Phone = u.Phone,
+                    Status = u.UserStatuses != null ? u.UserStatuses.StatusName : "Неизвестен",
+                    u.CreatedAt,
+                    u.UpdatedAt
+                }).ToList();
 
                 var exportData = employees;
 
-                string jsonString = JsonConvert.SerializeObject(exportData, Formatting.Indented,new JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                        NullValueHandling = NullValueHandling.Include
-                    });
+                string jsonString = JsonConvert.SerializeObject(exportData, Formatting.Indented, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Include
+                });
 
                 File.WriteAllText(saveFileDialog.FileName, jsonString, new UTF8Encoding(false));
 
-                MessageBox.Show( $"Экспорт завершён!\nСотрудников: {employees.Count}","Успех",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show($"Экспорт завершён!\nСотрудников: {employees.Count}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка экспорта:\n{ex.Message}\n\n{ex.InnerException?.Message}","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка экспорта:\n{ex.Message}\n\n{ex.InnerException?.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        // Экспорт Excel
         private void ExportExcel(object sender, RoutedEventArgs e)
         {
             try
@@ -108,10 +156,7 @@ namespace FTSControl.Pages
                 if (saveFileDialog.ShowDialog() != true)
                     return;
 
-                var context = ConnectObject.GetConnect();
-
-                // Подготовка данных 
-                var employees = context.Users
+                var employees = _originalUsersList
                     .Select(u => new
                     {
                         ID = u.UserID,
@@ -119,6 +164,7 @@ namespace FTSControl.Pages
                         Имя = u.FirstName,
                         Отчество = u.Patronymic,
                         Логин = u.Login,
+                        Пароль = u.Password,
                         Роль = u.Roles != null ? u.Roles.RoleName : "Не указана",
                         Департамент = u.Departments != null ? u.Departments.DepartmentName : "Не указан",
                         Почта = u.Email,
@@ -128,7 +174,6 @@ namespace FTSControl.Pages
                         Обновлён = u.UpdatedAt
                     }).ToList();
 
-                // Создание Excel-файла (EPPlus 4.x)
                 using (var package = new ExcelPackage())
                 {
                     var ws = package.Workbook.Worksheets.Add("Сотрудники");
@@ -136,19 +181,11 @@ namespace FTSControl.Pages
                     package.SaveAs(new FileInfo(saveFileDialog.FileName));
                 }
 
-                MessageBox.Show(
-                    $"Экспорт завершён!\nСотрудников: {employees.Count}",
-                    "Успех",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                MessageBox.Show($"Экспорт завершён!\nСотрудников: {employees.Count}","Успех",MessageBoxButton.OK,MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Ошибка экспорта:\n{ex.Message}\n\n{ex.InnerException?.Message}",
-                    "Ошибка",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка экспорта:\n{ex.Message}\n\n{ex.InnerException?.Message}","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
 
