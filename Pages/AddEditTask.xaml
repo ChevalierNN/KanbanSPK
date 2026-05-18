@@ -11,8 +11,9 @@
     <Grid>
         <!--Разметка-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,31 +26,29 @@
         </Grid.RowDefinitions>
 
         <!--Поля для заполнения-->
-        <Label Content="Дата создания" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" Grid.ColumnSpan="2" Margin="105,5,495,40" Grid.RowSpan="2"/>
-        <Label Content="дедлайн" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" Margin="119,29,0,0"/>
-        <DatePicker x:Name="DPDate" Grid.Row="0" Grid.Column="1" DisplayDateStart="2024-01-01" SelectedDate="{Binding CreatedAt}" Margin="0,5,0,29"/>
+        <Label Content="Дата создания" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" />
+        <Label Content="дедлайн" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=DPDate}" Margin="119,29,0,0"/>
+        <DatePicker x:Name="DPDate"  Grid.Row="0" Grid.Column="1" DisplayDateStart="2024-01-01" SelectedDate="{Binding CreatedAt}" Margin="0,5,20,29"/>
 
-        <Label Content="Название задачи" Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=TBTitle}" Grid.ColumnSpan="2" Margin="96,10,504,33" Grid.RowSpan="2"/>
-        <TextBox x:Name="TBTitle" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Margin="0,17,0,10"/>
+        <Label Content="Название задачи" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=TBTitle}" Margin="0,8,0,35" Grid.RowSpan="2" />
+        <TextBox x:Name="TBTitle" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Margin="0,17,20,10"/>
 
-        <Label Content="Описание" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=TBDescription}" Grid.ColumnSpan="2" Margin="127,3,473,42" Grid.RowSpan="2"/>
-        <TextBox x:Name="TBDescription" Text="{Binding Description}" Grid.Row="2" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,10,0,15"/>
+        <Label Content="Описание" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=TBDescription}" Margin="0,2,0,43" Grid.RowSpan="2" />
+        <TextBox x:Name="TBDescription" Text="{Binding Description}" Grid.Row="2" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,10,20,15"/>
 
-        <Label Content="Исполнитель" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=CBEmployee}" Grid.ColumnSpan="2" Margin="114,6,486,38" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CBEmployee" SelectedValue="{Binding AssignedToUserID}" DisplayMemberPath="LastName" 
-              SelectedValuePath="UserID" Grid.Row="3" Grid.Column="1" Margin="0,13,0,10"/>
+        <Label Content="Исполнитель" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=CBEmployee}" Margin="0,6,0,41" Grid.RowSpan="2"/>
+        <ComboBox x:Name="CBEmployee" SelectedValue="{Binding AssignedToUserID}" DisplayMemberPath="LastName" SelectedValuePath="UserID" Grid.Row="3" Grid.Column="1" Margin="0,13,20,10"/>
 
-        <Label Content="Создатель" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=CBManager}" IsEnabled="False" Grid.ColumnSpan="2" Margin="132,6,468,46" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CBManager" SelectedValue="{Binding CreatedByUserID}" DisplayMemberPath="FullName" 
-              SelectedValuePath="UserID" Grid.Row="4" Grid.Column="1" IsEnabled="False" Margin="0,12,0,10"/>
+        <Label Content="Создатель" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=CBManager}" IsEnabled="False" Margin="0,7,0,41" Grid.RowSpan="2" />
+        <ComboBox x:Name="CBManager" SelectedValue="{Binding CreatedByUserID}" DisplayMemberPath="FullName" SelectedValuePath="UserID" Grid.Row="4" Grid.Column="1" IsEnabled="False" Margin="0,12,20,10"/>
 
-        <Label Content="Статус" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=CBTaskStatus}" Grid.ColumnSpan="2" Margin="146,1,454,10"/>
-        <ComboBox x:Name="CBTaskStatus" SelectedValue="{Binding CurrentStatusID}" DisplayMemberPath="StatusName" 
-              SelectedValuePath="StatusID" Grid.Row="4" Grid.Column="1" Margin="0,43,0,30" Grid.RowSpan="2"/>
-        <DatePicker SelectedDate="{Binding DueDate}" Grid.Column="1" Margin="0,35,0,40" Grid.RowSpan="2" />
-        <Label Content="Приоритет" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=CBTaskStatus}" Grid.ColumnSpan="2" Margin="127,18,587,14" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CBPriority" DisplayMemberPath="PriorityName" SelectedValuePath="PriorityID" SelectedValue="{Binding PriorityID}" Margin="0,22,0,1" Grid.Row="5" Grid.Column="1" />
-        
+        <Label Content="Статус" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=CBTaskStatus}" Margin="344,36,0,11" Grid.RowSpan="2" />
+        <ComboBox x:Name="CBTaskStatus" SelectedValue="{Binding CurrentStatusID}" DisplayMemberPath="StatusName" SelectedValuePath="StatusID" Grid.Row="4" Grid.Column="1" Margin="0,43,20,30" Grid.RowSpan="2"/>
+
+        <DatePicker SelectedDate="{Binding DueDate}" Grid.Column="1" Margin="0,35,20,40" Grid.RowSpan="2" />
+        <Label Content="Приоритет" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0" Target="{Binding ElementName=CBTaskStatus}" Margin="0,17,0,15" Grid.RowSpan="2"/>
+        <ComboBox x:Name="CBPriority" DisplayMemberPath="PriorityName" SelectedValuePath="PriorityID" SelectedValue="{Binding PriorityID}" Margin="0,22,20,1" Grid.Row="5" Grid.Column="1" />
+
         <!--Кнопки-->
         <Button Content="OK" Grid.Row="6" Grid.Column="1" Click="ButtonOKAddEdit_Click" Margin="146,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60"/>
         <Button Grid.Column="1" Content="Выйти без изменений" Margin="217,1,0,0" Grid.Row="6" Click="ButtonBack_Click" Width="132" VerticalAlignment="Top" HorizontalAlignment="Left"/>
