@@ -72,14 +72,23 @@ git clone https://github.com/ChevalierNN/KanbanSPK.git
 
 ### Скриншоты приложения
 Авторизация
+
 <img width="480" height="301" alt="image" src="https://github.com/user-attachments/assets/fb64cbfb-715b-421d-be7f-091d9a6969a3" /> 
+
 Панель администратора
+
 <img width="480" height="301" alt="image" src="https://github.com/user-attachments/assets/dd06bdcb-f565-4b2e-a560-2f3068513353" /> 
+
 Панель добавления и изменения пользователей
+
 <img width="480" height="301" alt="image" src="https://github.com/user-attachments/assets/60b3e554-cf73-484e-8e42-a50664086f76" /> 
+
 Панель менеджера
+
 <img width="480" height="301" alt="image" src="https://github.com/user-attachments/assets/16418cf6-a2ca-4904-a9e3-3da6da8e641d" />
+
 Панель сотрудника
+
 <img width="480" height="301" alt="image" src="https://github.com/user-attachments/assets/d26eb9b6-0f98-42bd-a1eb-fdfec6786ec9" />
 
  
